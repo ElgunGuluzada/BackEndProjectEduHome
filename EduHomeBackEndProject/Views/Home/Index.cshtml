@@ -1,0 +1,185 @@
+﻿@model HomeVM
+@{
+    ViewData["Title"] = "Index";
+    int count = 0;
+}
+
+<!-- Background Area Start -->
+<section id="slider-container" class="slider-area">
+    <div class="slider-owl owl-theme owl-carousel">
+        @foreach (var slider in Model.Sliders)
+        {
+            <!-- Start Slingle Slide -->
+            <div class="single-slide item" style="background-image: url(img/slider/@slider.Image)">
+                <!-- Start Slider Content -->
+                <div class="slider-content-area">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-7 col-md-offset-left-5">
+                                <div class="slide-content-wrapper">
+                                    <div class="slide-content">
+                                        @Html.Raw(slider.Title)
+                                        <p>@slider.Discription</p>
+                                        <a class="default-btn" href="about.html">Learn more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start Slider Content -->
+            </div>
+            <!-- End Slingle Slide -->
+        }
+
+
+
+    </div>
+</section>
+<!-- Background Area End -->
+<!-- Notice Start -->
+<section class="notice-area pt-150 pb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="notice-left">
+                    @foreach (var item in Model.NoticeBoardLefts)
+                    {
+                        <h3>@item.Title</h3>
+                        if (count == 3)
+                        {
+                            <div class="single-notice-left pb-75">
+                                <h4>@item.Date</h4>
+                                <p>@item.Discription </p>
+                            </div>
+                        }
+                        else if (count == 6 || count == 9)
+                        {
+                            <div class="single-notice-left pb-70">
+                                <h4>@item.Date</h4>
+                                <p>@item.Discription </p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="single-notice-left mb-25 pb-25">
+                                <h4>@item.Date</h4>
+                                <p>@item.Discription </p>
+                            </div>
+                        }
+                        count++;
+                    }
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="notice-right">
+                    @foreach (var item in Model.NoticeBoardRights)
+                    {
+
+                        if (count == 3)
+                        {
+                            <div class="single-notice-right">
+                                <h3>@item.Title</h3>
+                                <p>@item.Discription </p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="single-notice-right " style="margin-bottom: 17px; padding-bottom: 17px">
+                                <h3>@item.Title</h3>
+                                <p>@item.Discription </p>
+                            </div>
+                        }
+                        count++;
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Notice End -->
+<!-- Choose Start -->
+<section class="choose-area pb-85 pt-77" style=" background: url(~/../img/choose/@Model.WhyYouChooseUss.Image); background-repeat: no-repeat;
+ background-size: cover;background-attachment: fixed; background-position: center center; position: relative;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-left-4 col-sm-8 col-md-offset-left-4">
+                <div class="choose-content text-left">
+                    <h2>@Model.WhyYouChooseUss.Title</h2>
+                    @Html.Raw(Model.WhyYouChooseUss.Description)
+                    <a class="default-btn" href="course-details.html">view courses</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Courses Area Start -->
+<div class="courses-area pt-150 text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title">
+                    <img src="~/img/icon/section.png" alt="section-title">
+                    <h2>COURSES WE OFFER</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row coursecard">
+            @await Component.InvokeAsync("Course", 3)
+        </div>
+    </div>
+</div>
+<!-- Courses Area End -->
+<!-- Event Area Start -->
+<div class="event-area one text-center pt-140 pb-150" style="padding-top: 70px !important">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title">
+                    <img src="img/icon/section.png" alt="section-title">
+                    <h2>UPCOMMING EVENTS</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                @await Component.InvokeAsync("Event", 4)
+            </div>
+            <div class="col-md-6 hidden-sm hidden-xs">
+                @await Component.InvokeAsync("Event", 4)
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Event Area End -->
+<!-- Testimonial Area Start -->
+<div class="testimonial-area pt-110 pb-105 text-center" style=" background: url(~/../img/testimonial/
+@Model.Testimonials.backGroundImage);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        position: relative;">
+    <div class="container">
+        <div class="row">
+            <div class="testimonial-owl owl-theme owl-carousel">
+                <div class="col-md-8 col-md-offset-2 col-sm-12">
+                    <div class="single-testimonial">
+                        <div class="testimonial-info">
+                            <div class="testimonial-img">
+                                <img src="~/../img/testimonial/@Model.Testimonials.Image" alt="testimonial">
+                            </div>
+                            <div class="testimonial-content">
+                                <p>@Model.Testimonials.Description</p>
+                                <h4>@Model.Testimonials.Name</h4>
+                                <h5>@Model.Testimonials.Job, @Model.Testimonials.nameOfLesson</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Testimonial Area End -->
